@@ -13,10 +13,7 @@ export const articlesApi = createApi({
 	},
 	tagTypes: [],
 	endpoints: (builder) => ({
-		getArticlesList: builder.query<
-			ArticlesResults[],
-			{ offset?: number; sort?: string | string[] }
-		>({
+		getArticlesList: builder.query<ArticlesResults, { offset?: number | string }>({
 			query: (arg) => {
 				return {
 					url: `/articles`,

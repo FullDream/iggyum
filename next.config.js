@@ -2,7 +2,9 @@
 const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
-	compiler: { emotion: true },
+	images: {
+		domains: ['api.realworld.io'],
+	},
 }
 
 module.exports = nextConfig
