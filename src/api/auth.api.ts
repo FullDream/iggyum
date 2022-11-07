@@ -1,29 +1,26 @@
+import { Login, Register, UserAuthResponse } from '@types/auth.interface'
 import { api } from '.'
-import { UserWithToken } from '@types/user.interface'
-
-export interface UserResponse {
-	user: UserWithToken
-}
-
-export interface LoginRequest {
-	user: {
-		email: string
-		password: string
-	}
-}
 
 const authApi = api.injectEndpoints({
 	endpoints: (builder) => ({
-		login: builder.mutation<UserResponse, LoginRequest>({
-			query: (data) => ({
-				url: 'users/login',
+		register: builder.mutation<UserAuthResponse, Register>({
+			query: (user) => ({
+				url: 'users',
 				method: 'POST',
-				body: data,
+				body: { user },
 			}),
 		}),
+		login: builder.mutation<UserAuthResponse, Login>({
+			query: (user) => ({
+				url: 'users/login',
+				method: 'POST',
+				body: { user },
+			}),
+		}),
+
 		protected: builder.mutation<{ message: string }, void>({
 			query: () => 'protected',
 		}),
 	}),
 })
-export const { useLoginMutation, useProtectedMutation } = authApi
+export const { useLoginMutation, useRegisterMutation, useProtectedMutation } = authApi
