@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Pagination, Spinner } from 'flowbite-react'
-import cn from 'classnames'
+import { Spinner } from 'flowbite-react'
 
 import { useGetArticlesListQuery } from 'api/articles.api'
 import { ArticleCard } from '@common/components'
+import { Pagination } from 'antd'
 
 const checkOffset = (number?: number) => {
 	if (!number) return 0
@@ -33,12 +33,7 @@ export default function Home() {
 
 	return (
 		<>
-			<div>
-				<div>
-					<h1 style={{ textAlign: 'center' }}>conduit</h1>
-				</div>
-			</div>
-			<div className="md:container md:mx-auto grid gap-3">
+			<div className="grid gap-3">
 				{isLoading && (
 					<div className="row-span-full justify-self-center p-12">
 						<Spinner size="xl" />
@@ -49,14 +44,15 @@ export default function Home() {
 					<ArticleCard key={item.slug} {...item} />
 				))}
 			</div>
-			<div className="flex items-center justify-center text-center">
-				<Pagination
-					currentPage={currentPage}
-					onPageChange={onPageChange}
-					showIcons={true}
-					totalPages={17}
-				/>
-			</div>
+			<Pagination
+				className="py-5 flex items-center justify-center"
+				disabled={isFetching}
+				defaultCurrent={1}
+				showSizeChanger={false}
+				onChange={onPageChange}
+				current={currentPage}
+				total={data?.articlesCount}
+			/>
 		</>
 	)
 }

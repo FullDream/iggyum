@@ -9,6 +9,8 @@ export interface Register extends Login {
 	username: string
 }
 
+
+
 export interface UserAuthResponse {
 	user: UserWithToken
 }
