@@ -5,6 +5,7 @@ import { Spinner } from 'flowbite-react'
 import { useGetArticlesListQuery } from 'api/articles.api'
 import { ArticleCard } from '@common/components'
 import { Pagination } from 'antd'
+import { Tags } from 'features/tags/Tags'
 
 const checkOffset = (number?: number) => {
 	if (!number) return 0
@@ -33,16 +34,20 @@ export default function Home() {
 
 	return (
 		<>
-			<div className="grid gap-3">
-				{isLoading && (
-					<div className="row-span-full justify-self-center p-12">
-						<Spinner size="xl" />
-					</div>
-				)}
+			<div className=" mt-5 grid grid-cols-[1fr_250px] gap-6 ">
+				<div className="grid gap-3">
+					{isLoading && (
+						<div className="row-span-full justify-self-center p-12">
+							<Spinner size="xl" />
+						</div>
+					)}
 
-				{data?.articles.map((item) => (
-					<ArticleCard key={item.slug} {...item} />
-				))}
+					{data?.articles.map((item) => (
+						<ArticleCard key={item.slug} {...item} />
+					))}
+				</div>
+
+				<Tags />
 			</div>
 			<Pagination
 				className="py-5 flex items-center justify-center"
