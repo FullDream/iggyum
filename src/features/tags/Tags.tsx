@@ -1,10 +1,14 @@
+import { FC } from 'react'
 import { RootState } from '@store/index'
-import { Tag, Card, Button } from 'antd'
-import { useGetTagsListQuery } from 'api/tags.api'
 import { useDispatch, useSelector } from 'react-redux'
+import { useGetTagsListQuery } from 'api/tags.api'
 import { addTag, deleteAllTags, deleteTag } from './tags.slice'
+import { TagsProps } from './tags.props'
+
+import { Tag, Card, Button } from 'antd'
 import { UndoOutlined } from '@ant-design/icons'
-export const Tags = () => {
+
+export const Tags: FC<TagsProps> = ({ className }) => {
 	const { data, isLoading } = useGetTagsListQuery()
 	const dispatch = useDispatch()
 
@@ -22,7 +26,7 @@ export const Tags = () => {
 				</div>
 			}
 			loading={isLoading}
-			className="h-max">
+			className={className}>
 			{data?.map((item) => (
 				<Tag.CheckableTag
 					onChange={(checked) => onPressTag(item, checked)}
