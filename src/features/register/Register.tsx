@@ -1,4 +1,4 @@
-import { Register as RegisterForm } from '@types/auth.interface'
+import { Register as RegisterForm } from 'types/auth.interface'
 import { useRegisterMutation } from 'api/auth.api'
 import { setCredentials } from 'features/auth/auth.slice'
 import { Label, TextInput, Button, Spinner } from 'flowbite-react'
@@ -14,11 +14,9 @@ export const Register = () => {
 	const dispatch = useDispatch()
 
 	const onSubmit = async (data: RegisterForm) => {
-		try {
-			const res = await signUp(data).unwrap()
-			dispatch(setCredentials(res.user.token))
-			router.push('/')
-		} catch (err) {}
+		const res = await signUp(data).unwrap()
+		dispatch(setCredentials(res.user.token))
+		router.push('/')
 	}
 
 	return (

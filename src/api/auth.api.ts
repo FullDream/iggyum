@@ -1,4 +1,4 @@
-import { Login, Register, UserAuthResponse } from '@types/auth.interface'
+import { Login, Register, UserAuthResponse } from 'types/auth.interface'
 import { api } from '.'
 
 const authApi = api.injectEndpoints({

@@ -2,10 +2,10 @@
 	"compilerOptions": {
 		"target": "ES2015",
 		"baseUrl": "./src",
+		"types": [],
 		"paths": {
 			"@common/*": ["common/*"],
-			"@store/*": ["store/*"],
-			"@types/*": ["types/*"]
+			"@store/*": ["store/*"]
 		},
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,

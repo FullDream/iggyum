@@ -1,4 +1,4 @@
-import { Article } from '@types/articles.interface'
+import { Article } from 'types/articles.interface'
 
 export interface ArticleCardProps extends Article {
 	className?: string

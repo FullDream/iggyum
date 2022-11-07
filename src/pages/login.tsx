@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
-import { Login as LoginForm } from '@types/auth.interface'
+import { Login as LoginForm } from 'types/auth.interface'
 
 export default function Login() {
 	const { register, handleSubmit } = useForm<LoginForm>()

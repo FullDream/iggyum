@@ -13,9 +13,7 @@ export const LikeBtn: FC<LikeBtnProps> = ({ slug, favorited, favoritesCount, cla
 	const onLikeClick = async () => {
 		if (!isAuth) return router.push('/login')
 
-		try {
-			await sendLike({ slug, method: favorited ? 'DELETE' : 'POST' })
-		} catch (err) {}
+		await sendLike({ slug, method: favorited ? 'DELETE' : 'POST' })
 	}
 	return (
 		<button
