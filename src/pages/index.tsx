@@ -1,27 +1,33 @@
-import { ArticleCard } from '@common/components'
-
-import { Pagination } from 'flowbite-react'
-import { useGetArticlesListQuery } from 'api/articles.api'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Pagination, Spinner } from 'flowbite-react'
+import cn from 'classnames'
 
-const checkOffset = (number?: string) => {
+import { useGetArticlesListQuery } from 'api/articles.api'
+import { ArticleCard } from '@common/components'
+
+const checkOffset = (number?: number) => {
 	if (!number) return 0
 	return (+number - 1) * 10
 }
 
 export default function Home() {
-	const router = useRouter()
-	const [offset, setOffset] = useState(0)
-
-	const { data } = useGetArticlesListQuery({ offset })
 	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [offset, setOffset] = useState<number>(0)
 
-	useEffect(() => {}, [])
+	const router = useRouter()
+	const { data, isLoading, isFetching } = useGetArticlesListQuery({ offset })
+
+	useEffect(() => {
+		if (router.query.page) {
+			const numberPageQuery = Number(router.query.page)
+
+			setCurrentPage(numberPageQuery)
+			setOffset(checkOffset(numberPageQuery))
+		}
+	}, [router.query.page])
 
 	const onPageChange = (page: number) => {
-		setOffset((state) => (state = checkOffset(page)))
-		setCurrentPage((state) => (state = page))
 		router.push({ query: { page } })
 	}
 
@@ -33,6 +39,12 @@ export default function Home() {
 				</div>
 			</div>
 			<div className="md:container md:mx-auto grid gap-3">
+				{isLoading && (
+					<div className="row-span-full justify-self-center p-12">
+						<Spinner size="xl" />
+					</div>
+				)}
+
 				{data?.articles.map((item) => (
 					<ArticleCard key={item.slug} {...item} />
 				))}

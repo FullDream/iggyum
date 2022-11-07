@@ -19,7 +19,6 @@ const authApi = api.injectEndpoints({
 				url: 'users/login',
 				method: 'POST',
 				body: data,
-				credentials: 'include',
 			}),
 		}),
 		protected: builder.mutation<{ message: string }, void>({

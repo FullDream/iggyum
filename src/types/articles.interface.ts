@@ -17,3 +17,20 @@ export interface ArticlesResults {
 	articles: Article[]
 	articlesCount: number
 }
+
+export interface FavoritedBy {
+	id: number
+	email: string
+	username: string
+	password: string
+	image: string
+	bio: string
+	demo: boolean
+}
+
+export interface ArticleFavoriteResponce extends Article {
+	id: number
+	authorId: number
+	tagList: string[]
+	favoritedBy: FavoritedBy[]
+}

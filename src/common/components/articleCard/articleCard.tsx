@@ -12,18 +12,19 @@ export const ArticleCard: FC<ArticleCardProps> = ({
 	title,
 	createdAt,
 	description,
+	className,
 	slug,
-	...likeProps
+	...props
 }) => {
 	return (
-		<Card>
+		<Card className={className}>
 			<div className="grid grid-cols-[auto_1fr_1fr] gap-3">
 				<Image src={author.image} quality={100} width={50} height={50} alt={author.username} />
 				<div className="self-start">
 					<h3>{author.username}</h3>
 					<time>{format(new Date(createdAt), 'dd.mm.yyyy')}</time>
 				</div>
-				<LikeBtn className="justify-self-end" {...likeProps} />
+				<LikeBtn className="justify-self-end" slug={slug} {...props} />
 			</div>
 			<h2>{title}</h2>
 			<p className="opacity-80">{description}</p>

@@ -1,18 +1,34 @@
 import { FC } from 'react'
 import { LikeBtnProps } from './likeBtn.props'
 import cn from 'classnames'
+import { useFavoriteArticleBySlugMutation } from 'api/articles.api'
+import { useRouter } from 'next/router'
+import { useAuthUser } from '@common/hooks'
 
-export const LikeBtn: FC<LikeBtnProps> = ({ favorited, favoritesCount, className }) => {
+export const LikeBtn: FC<LikeBtnProps> = ({ slug, favorited, favoritesCount, className }) => {
+	const [sendLike, { isLoading }] = useFavoriteArticleBySlugMutation()
+	const router = useRouter()
+	const isAuth = useAuthUser()
+
+	const onLikeClick = async () => {
+		if (!isAuth) return router.push('/login')
+
+		try {
+			await sendLike({ slug, method: favorited ? 'DELETE' : 'POST' })
+		} catch (err) {}
+	}
 	return (
 		<button
+			onClick={onLikeClick}
 			className={cn(
 				'border-blue-100 border-2 flex gap-2 justify-center p-2 h-max',
 				'hover:shadow-lg',
 				'text-blue-500',
 				'transition-all',
-				{ 'text-red-500': favorited },
+				{ 'text-red-500': favorited, 'opacity-60': isLoading },
 				className,
-			)}>
+			)}
+			disabled={isLoading}>
 			{favoritesCount}
 			<svg
 				className="w-6 h-6"

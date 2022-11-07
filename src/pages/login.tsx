@@ -1,6 +1,6 @@
 import { useLoginMutation } from 'api/auth.api'
 import { setCredentials } from 'features/auth/auth.slice'
-import { Label, TextInput, Button } from 'flowbite-react'
+import { Label, TextInput, Button, Spinner } from 'flowbite-react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
@@ -8,17 +8,11 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
 export default function Login() {
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm()
-
+	const { register, handleSubmit } = useForm()
+	const [login, { isLoading }] = useLoginMutation()
 	const router = useRouter()
-
 	const dispatch = useDispatch()
-	const [login, { isLoading, error }] = useLoginMutation()
+
 	const onSubmit = async (data) => {
 		try {
 			const res = await login({ user: data }).unwrap()
@@ -43,7 +37,8 @@ export default function Login() {
 					<TextInput id="password" type="password" required={true} {...register('password')} />
 				</div>
 				<Button className="mt-2" type="submit">
-					Sign in
+					{isLoading && <Spinner aria-label="Spinner button example" />}
+					<span>Sign in</span>
 				</Button>
 			</form>
 		</div>

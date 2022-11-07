@@ -1,5 +1,5 @@
 import { api } from '.'
-import { Article, ArticlesResults } from '../types'
+import { Article, ArticleFavoriteResponce, ArticlesResults } from '../types'
 
 export const articlesApi = api.injectEndpoints({
 	endpoints: (builder) => ({
@@ -10,11 +10,23 @@ export const articlesApi = api.injectEndpoints({
 					params: { ...arg },
 				}
 			},
+			providesTags: ['Articles'],
 		}),
 		getArticleBySlug: builder.query<Article, string>({
 			query: (slug) => `/articles/${slug}`,
 		}),
+		favoriteArticleBySlug: builder.mutation<
+			ArticleFavoriteResponce,
+			{ slug: string; method: 'POST' | 'DELETE' }
+		>({
+			query: ({ slug, method }) => ({ url: `articles/${slug}/favorite`, method }),
+			invalidatesTags: ['Articles'],
+		}),
 	}),
 })
 
-export const { useGetArticleBySlugQuery, useGetArticlesListQuery } = articlesApi
+export const {
+	useGetArticleBySlugQuery,
+	useGetArticlesListQuery,
+	useFavoriteArticleBySlugMutation,
+} = articlesApi
