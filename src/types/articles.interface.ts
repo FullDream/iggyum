@@ -1,9 +1,4 @@
-export interface Author {
-	username: string
-	bio?: any
-	image: string
-	following: boolean
-}
+import { Profile } from './user.interface'
 
 export interface Article {
 	slug: string
@@ -15,7 +10,7 @@ export interface Article {
 	updatedAt: Date
 	favorited: boolean
 	favoritesCount: number
-	author: Author
+	author: Profile
 }
 
 export interface ArticlesResults {

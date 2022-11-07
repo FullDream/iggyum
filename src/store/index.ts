@@ -1,17 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { createWrapper } from 'next-redux-wrapper'
-import { articlesApi } from './slices/articlesApi.slice'
+import authReducer from 'features/auth/auth.slice'
+import { api } from '../api'
 
-export const makeStore = () =>
+const makeStore = () =>
 	configureStore({
 		reducer: {
-			[articlesApi.reducerPath]: articlesApi.reducer,
+			[api.reducerPath]: api.reducer,
+			auth: authReducer,
 		},
-		middleware: (gDM) => gDM().concat(articlesApi.middleware),
+		middleware: (gDM) => gDM().concat(api.middleware),
 	})
 
+const store = makeStore()
 export type RootStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<RootStore['getState']>
 export type RootDispatch = RootStore['dispatch']
 
-export const wrapper = createWrapper<RootStore>(makeStore, { debug: false })
+export default store

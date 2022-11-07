@@ -1,12 +1,7 @@
 import { ArticleCard } from '@common/components'
-import { wrapper } from '@store/index'
 
 import { Pagination } from 'flowbite-react'
-import {
-	getArticlesList,
-	getRunningOperationPromises,
-	useGetArticlesListQuery,
-} from '@store/slices/articlesApi.slice'
+import { useGetArticlesListQuery } from 'api/articles.api'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -53,13 +48,3 @@ export default function Home() {
 		</>
 	)
 }
-
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
-	await store.dispatch(getArticlesList.initiate({ offset: checkOffset(context.query.page) }))
-
-	await Promise.all(getRunningOperationPromises())
-
-	return {
-		props: {},
-	}
-})
