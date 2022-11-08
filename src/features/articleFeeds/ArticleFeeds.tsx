@@ -2,11 +2,10 @@ import { RootState } from '@store/index'
 import { Tabs } from 'antd'
 import { deleteTag } from 'features/tags/tags.slice'
 import { useRouter } from 'next/router'
-import { FC, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const ArticleFeeds: FC<{ children: ReactNode }> = ({ children }) => {
+export const ArticleFeeds = () => {
 	const router = useRouter()
 	const [tabs, setTabs] = useState<any[]>()
 	const activeTags = useSelector<RootState, string[]>((state) => state.tags.data)
@@ -15,7 +14,6 @@ export const ArticleFeeds: FC<{ children: ReactNode }> = ({ children }) => {
 	const initialItems = [
 		{
 			label: 'Global Feed',
-			children: children,
 			key: 'MAIN',
 			closable: false,
 		},
@@ -26,7 +24,6 @@ export const ArticleFeeds: FC<{ children: ReactNode }> = ({ children }) => {
 			...initialItems,
 			...activeTags.map((tag) => ({
 				label: tag,
-				children,
 				key: tag,
 				closable: true,
 			})),
