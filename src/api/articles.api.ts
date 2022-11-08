@@ -34,3 +34,5 @@ export const {
 	useGetArticlesListQuery,
 	useFavoriteArticleBySlugMutation,
 } = articlesApi
+
+export const { getArticlesList } = articlesApi.endpoints
