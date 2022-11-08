@@ -53,10 +53,11 @@ export const ArticleFeeds = () => {
 	return (
 		<Tabs
 			hideAdd
+			defaultActiveKey="MAIN"
 			type="editable-card"
 			destroyInactiveTabPane={true}
 			onChange={onChange}
-			activeKey={(router.query.tag as string) || 'MAIN'}
+			activeKey={router.query.tag as string}
 			onEdit={onEdit}
 			items={tabs}
 		/>
