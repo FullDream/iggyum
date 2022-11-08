@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 
 import 'antd/dist/antd.css'
 import '../styles/global.css'
-import { Header } from '@common/components'
+import { Header } from 'features/header/Header'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 	return (

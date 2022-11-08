@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { Card, Button } from 'flowbite-react'
 
 import { ArticleCardProps } from './articleCard.props'
-import { LikeBtn } from '../likeBtn/likeBtn'
+import { LikeBtn } from '../../../features/likeBtn/LikeBtn'
 import Link from 'next/link'
 
 export const ArticleCard: FC<ArticleCardProps> = ({
