@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Spinner } from 'flowbite-react'
 import { useGetArticlesListQuery } from 'api/articles.api'
-import { ArticleCard } from '@common/components'
 import { Pagination } from 'antd'
 import { Tags } from 'features/tags/Tags'
 import { ArticleFeeds } from 'features/articleFeeds/ArticleFeeds'
+import { ArticleCard } from '@common/components/articleCard/ArticleCard'
 
 export const Home = () => {
 	const router = useRouter()
