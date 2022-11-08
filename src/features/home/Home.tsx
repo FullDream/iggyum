@@ -5,7 +5,7 @@ import { useGetArticlesListQuery } from 'api/articles.api'
 import { Pagination } from 'antd'
 import { Tags } from 'features/tags/Tags'
 import { ArticleFeeds } from 'features/articleFeeds/ArticleFeeds'
-import { ArticleCard } from '../../common/components/articleCard/ArticleCard'
+import { ArticleCard } from '@common/components/articleCard/ArticleCard'
 
 export const Home = () => {
 	const router = useRouter()
