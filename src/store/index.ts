@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from 'features/auth/auth.slice'
 import tagsReducer from 'features/tags/tags.slice'
+import { createWrapper } from 'next-redux-wrapper'
 import { api } from '../api'
 
 const makeStore = () =>
@@ -13,9 +14,8 @@ const makeStore = () =>
 		middleware: (gDM) => gDM().concat(api.middleware),
 	})
 
-const store = makeStore()
 export type RootStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<RootStore['getState']>
 export type RootDispatch = RootStore['dispatch']
 
-export default store
+export const wrapper = createWrapper<RootStore>(makeStore, { debug: false })

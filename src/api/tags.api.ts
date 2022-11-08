@@ -14,3 +14,5 @@ const tagsApi = api.injectEndpoints({
 })
 
 export const { useGetTagsListQuery } = tagsApi
+
+export const { getTagsList } = tagsApi.endpoints
